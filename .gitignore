@@ -1,8 +1,5 @@
-# cache du projet
-/devngo_django/__pycache__
-
 # configuration de l' editeur de code
 /.vscode
 
 # sqlite test database
-/db.sqlite3
+/src/*.sqlite3
