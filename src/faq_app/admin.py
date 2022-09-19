@@ -1,8 +1,12 @@
+"""
+Django admin registration
+"""
+
 from django.contrib import admin
-from .models import Answer, Question
+from faq_app.models import Answer, Question
+
 
 # Register your models here.
-
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     '''Admin View for Question'''
@@ -15,5 +19,5 @@ class QuestionAdmin(admin.ModelAdmin):
 class AnswerAdmin(admin.ModelAdmin):
     '''Admin View for Answer'''
 
-    list_display = ('question', 'answer',)
-    list_filter = ('question', 'answer',)
+    list_display = ('question', 'client', 'answer',)
+    list_filter = ('question', 'client', 'answer',)

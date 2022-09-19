@@ -27,4 +27,4 @@ migrations:
 django-tests:
   stage: test
   script:
-    - python3 src/manage.py test
+    - python3 src/manage.py test src
