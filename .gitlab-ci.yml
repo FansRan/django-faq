@@ -13,17 +13,18 @@ default:
     - apt -y install net-tools python3.8 python3-pip
     - apt -y upgrade
     - pip3 install -r requirements/test.txt
+    - export DJANGO_SETTINGS_MODULE=devngo_django.settings.test
 
 
 migrations:
   stage: build
   script:
-    - DJANGO_SETTINGS_MODULE=devngo_django.settings.test python3 src/manage.py makemigrations
-    - DJANGO_SETTINGS_MODULE=devngo_django.settings.test python3 src/manage.py migrate
-    - DJANGO_SETTINGS_MODULE=devngo_django.settings.test python3 src/manage.py check
+    - python3 src/manage.py makemigrations
+    - python3 src/manage.py migrate
+    - python3 src/manage.py check
 
 
 django-tests:
   stage: test
   script:
-    - DJANGO_SETTINGS_MODULE=devngo_django.settings.test python3 src/manage.py test
+    - python3 src/manage.py test

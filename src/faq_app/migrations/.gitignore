@@ -1,2 +1,5 @@
 # cache du projet
 /__pycache__
+
+# migrations
+0*.py
