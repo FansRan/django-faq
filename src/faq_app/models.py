@@ -2,7 +2,6 @@
 Django model definition
 """
 
-from http import client
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -33,8 +32,8 @@ class Answer(models.Model):
     """Model definition for Answer."""
        
     answer = models.TextField()
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    client = models.ForeignKey(User, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question,  related_name='answers', on_delete=models.CASCADE)
+    client = models.ForeignKey(User, related_name='answers', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -3,3 +3,6 @@
 
 # sqlite test database
 /src/*.sqlite3
+
+# test coverage
+/.coverage
