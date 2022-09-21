@@ -14,7 +14,7 @@ class QuestionTestCase(TestCase):
     @classmethod
     def setup_data(cls):
         """Questions test data"""
-        Question.objects.create(question="What's the most popular tech?")
+        Question.objects.create(question="What's the most popular tech?", author="test@test.fr")
 
     def test_questions_is_correct(self):
         """Questions are correctly the expected"""

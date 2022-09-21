@@ -52,7 +52,7 @@ class QuestionTests(APITestCase):
         Ensure we can create a new Question object.
         """
         url = reverse('question-list')
-        data = {'question': 'Est-il créer?'}
+        data = {'question': 'Est-il créer?', 'author': 'test@test.fr'}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Question.objects.count(), 1)
@@ -83,7 +83,7 @@ class AnswerTests(APITestCase):
         self.client.login(username='john', password='password_ex')
         # Post new question
         question_url = reverse('question-list')
-        question_data = {'question': 'Va-t-il créer une réponse?'}
+        question_data = {'question': 'Va-t-il créer une réponse?', 'author': 'test@test.fr'}
         self.client.post(question_url, question_data, format='json')
         # Post new answer
         url = reverse('answer-list')

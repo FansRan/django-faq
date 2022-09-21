@@ -16,7 +16,7 @@ class QuestionSerializer(serializers.HyperlinkedModelSerializer):
         """Meta definition for Question Serializer."""
 
         model = Question
-        fields = ['id', 'question', 'answers', 'created_at', 'updated_at']
+        fields = ['id', 'author', 'question', 'answers', 'created_at', 'updated_at']
 
 class AnswerSerializer(serializers.HyperlinkedModelSerializer):
     """Serializers for Answer Model"""
