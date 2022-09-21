@@ -1,8 +1,8 @@
 """
-Django views for FAQ application
+Django views for FAQ application API
 """
 
-from rest_framework import viewsets, permissions, authentication
+from rest_framework import viewsets, permissions
 from django.contrib.auth.models import User
 from faq_app.models import Question, Answer
 from faq_app.serializers import QuestionSerializer, AnswerSerializer, UserSerializer

@@ -11,11 +11,14 @@ from faq_app.models import Answer, Question
 class QuestionTestCase(TestCase):
     """Unit test for Question Model"""
 
-    def setUp(self):
+    @classmethod
+    def setup_data(cls):
+        """Questions test data"""
         Question.objects.create(question="What's the most popular tech?")
 
     def test_questions_is_correct(self):
         """Questions are correctly the expected"""
+        self.setup_data()
         tech_question = Question.objects.get(pk=1)
         self.assertTrue(isinstance(tech_question, Question))
         self.assertEqual(str(tech_question), "What's the most popular tech?")
@@ -27,7 +30,7 @@ class AnswerTestCase(TestCase):
 
     def setUp(self):
         user = User.objects.create_user('john', 'john@doe.com')
-        Question.objects.create(question="What's the most popular tech?")
+        QuestionTestCase.setup_data()
         Answer.objects.create(question_id=1, client=user, answer="Python the best")
 
     def test_answers_is_correct(self):

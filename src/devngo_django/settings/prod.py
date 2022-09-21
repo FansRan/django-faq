@@ -4,7 +4,7 @@ Settings for production environment only.
 It override the base settings
 """
 
-from .base import *
+from devngo_django.settings.base import *
 
 DEBUG = False
 

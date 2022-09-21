@@ -11,19 +11,37 @@ from faq_app.models import Question, Answer
 class AuthTests(APITestCase):
     """API test for Authentication"""
 
-    def test_registration_login(self):
+    def register(self):
         """
-        Ensure we can register then authenticate
+        Ensure we can register
         """
-        # Registration
-        url = reverse('rest_registration:register')
+        url = reverse('register')
         data = {'username': 'test', 'password': 'password_ex', 'password_confirm': 'password_ex'}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+    def test_login(self):
+        """
+        Ensure we can authenticate
+        """
+        # Registration
+        self.register()
         # Login
         logged = self.client.login(username='test', password='password_ex')
         self.assertTrue(logged)
+
+    def test_get_token(self):
+        """
+        Ensure we can get the token authentication
+        """
+        # Registration
+        self.register()
+        # Login
+        url = reverse('token_obtain_pair')
+        data = {'username': 'test', 'password': 'password_ex'}
+        response = self.client.post(url, data, format='json')
+        self.assertTrue('access' in response.data)
+        self.assertTrue('refresh' in response.data)
 
 
 class QuestionTests(APITestCase):
@@ -44,9 +62,11 @@ class QuestionTests(APITestCase):
         """
         Ensure we can get a list of Question object.
         """
+        self.test_create_question()
         url = reverse('question-list')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data['results']), 1)
 
 
 class AnswerTests(APITestCase):
@@ -56,23 +76,19 @@ class AnswerTests(APITestCase):
         """
         Ensure we can create a new Answer object.
         """
-        # Registration
-        register_url = reverse('rest_registration:register')
-        register_data = {'username': 'john', 'password': 'password_example', 'password_confirm': 'password_example'}
-        self.client.post(register_url, register_data, format='json')
-
+        # Register
+        register_data = {'username': 'john', 'password': 'password_ex', 'password_confirm': 'password_ex'}
+        self.client.post(reverse('register'), register_data, format='json')
         # Login
-        self.client.login(username='john', password='password_example')
-
+        self.client.login(username='john', password='password_ex')
         # Post new question
         question_url = reverse('question-list')
-        question_data = {'question': 'Va-t-il créer une reponse?'}
+        question_data = {'question': 'Va-t-il créer une réponse?'}
         self.client.post(question_url, question_data, format='json')
-
         # Post new answer
-        answer_url = reverse('answer-list')
-        answer_data = {'answer': 'Oui', 'question': question_url + '1/'}
-        response = self.client.post(answer_url, answer_data, format='json')
+        url = reverse('answer-list')
+        data = {'answer': 'Oui', 'question': question_url + '1/'}
+        response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Answer.objects.count(), 1)
         self.assertEqual(Answer.objects.get().answer, 'Oui')
@@ -81,6 +97,8 @@ class AnswerTests(APITestCase):
         """
         Ensure we can get a list of Answer object.
         """
+        self.test_create_answer()
         url = reverse('answer-list')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data['results']), 1)
