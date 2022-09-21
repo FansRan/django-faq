@@ -3,14 +3,14 @@ stages:
   - test
 
 default:
-  image: ubuntu:20.04
+  image: ubuntu:22.04
   cache:
     paths:
       - ~/.cache/pip/
   before_script:
     - apt -y update
     - apt -y install apt-utils
-    - apt -y install net-tools python3.8 python3-pip
+    - apt -y install net-tools python3.10 python3-pip
     - apt -y upgrade
     - pip3 install -r requirements/test.txt
     - export DJANGO_SETTINGS_MODULE=devngo_django.settings.test
@@ -27,4 +27,4 @@ migrations:
 django-tests:
   stage: test
   script:
-    - python3 src/manage.py test
+    - coverage run src/manage.py test src/

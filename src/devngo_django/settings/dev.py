@@ -4,7 +4,7 @@ Settings for development environment only.
 It override the base settings
 """
 
-from .base import *
+from devngo_django.settings.base import *
 
 
 DATABASES = {
