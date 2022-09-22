@@ -7,13 +7,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('faq_app', '0001_initial'),
+        ("faq_app", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='question',
-            name='question',
-            field=models.CharField(max_length=255, unique=True, validators=[django.core.validators.RegexValidator('^.*\\?$', message='Must end with question mark')]),
+            model_name="question",
+            name="question",
+            field=models.CharField(
+                max_length=255,
+                unique=True,
+                validators=[
+                    django.core.validators.RegexValidator(
+                        "^.*\\?$", message="Must end with question mark"
+                    )
+                ],
+            ),
         ),
     ]
