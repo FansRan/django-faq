@@ -3,7 +3,8 @@ Django form definition
 """
 
 from django import forms
-from faq_app.models import Question, Answer
+
+from faq_app.models import Answer, Question
 
 
 class QuestionForm(forms.ModelForm):
@@ -11,6 +12,7 @@ class QuestionForm(forms.ModelForm):
 
     class Meta:
         """Meta definition for Question Form."""
+
         model = Question
         fields = "__all__"
 
@@ -20,5 +22,6 @@ class AnswerForm(forms.ModelForm):
 
     class Meta:
         """Meta definition for Answer Form."""
+
         model = Answer
-        fields = "__all__" 
+        fields = "__all__"

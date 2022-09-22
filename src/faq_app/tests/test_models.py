@@ -2,8 +2,9 @@
 Django Model test for the FAQ Application
 """
 
-from django.test import TestCase
 from django.contrib.auth.models import User
+from django.test import TestCase
+
 from faq_app.models import Answer, Question
 
 
@@ -14,7 +15,9 @@ class QuestionTestCase(TestCase):
     @classmethod
     def setup_data(cls):
         """Questions test data"""
-        Question.objects.create(question="What's the most popular tech?", author="test@test.fr")
+        Question.objects.create(
+            question="What's the most popular tech?", author="test@test.fr"
+        )
 
     def test_questions_is_correct(self):
         """Questions are correctly the expected"""
@@ -29,7 +32,7 @@ class AnswerTestCase(TestCase):
     """Unit test for Answer Model"""
 
     def setUp(self):
-        user = User.objects.create_user('john', 'john@doe.com')
+        user = User.objects.create_user("john", "john@doe.com")
         QuestionTestCase.setup_data()
         Answer.objects.create(question_id=1, client=user, answer="Python the best")
 

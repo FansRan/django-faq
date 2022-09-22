@@ -107,6 +107,8 @@ Run the following command
 
 This project uses python3.10 and venv module
 
+Run these commands
+
 ```bash
  sudo apt install python3.10
 
@@ -171,11 +173,11 @@ To run tests, run the following command
 <!-- Deploy -->
 ### Deploy on docker
 
-To deploy the app in docker, run the following commands
+To deploy the app in docker, 
+ensure you have docker installed in your machine 
+and run the following command
 
-```bash
-  python3 src/manage.py collectstatic
-  
+```bash  
   sudo docker-compose up --build
 ```
 
