@@ -2,25 +2,37 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" />
         <meta name="viewport"
-              content="width=device-width, initial-scale=1, shrink-to-fit=no">
+              content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <title>FAQ Application</title>
-        <link href="{% static 'favicon.png' %}" rel="icon" type="image/png">
+        <link href="{% static 'favicon.png' %}" rel="icon" type="image/png" />
         <link rel="stylesheet"
-              href="https://fonts.googleapis.com/css?family=Varela+Round">
+              href="https://fonts.googleapis.com/css?family=Varela+Round"/>
         <link rel="stylesheet"
-              href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
         <link rel="stylesheet"
-              href="https://fonts.googleapis.com/icon?family=Material+Icons">
+              href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
         <link rel="stylesheet"
-              href="https://demo.voidcoders.com/htmldemo/fitgear/main-files/assets/css/animate.css">
+              href="https://demo.voidcoders.com/htmldemo/fitgear/main-files/assets/css/animate.css"/>
         <link rel="stylesheet"
-              href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-        <link rel="stylesheet" href="{% static 'faq/css/home.css' %}">
-        <link rel="stylesheet" href="{% static 'faq/css/style.css' %}">
+              href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"/>
+        <link rel="stylesheet" href="{% static 'faq/css/home.css' %}" />
+        <link rel="stylesheet" href="{% static 'faq/css/style.css' %}" />
     </head>
     <body>
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible"
+                 role="alert"
+                 style="position: absolute;
+                        top: 80px;
+                        right: 50px;">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message | safe }}
+            </div>
+        {% endfor %}
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <a href="#" class="navbar-brand">Devn<b>Go</b></a>
             <button type="button"
@@ -39,11 +51,11 @@
                                data-toggle="dropdown"
                                class="nav-item nav-link dropdown-toggle">API Docs</a>
                             <div class="dropdown-menu">
-                                <a target="blank"
+                                <a target="_blank"
                                    href="{% url 'schema-swagger-ui' %}"
                                    class="dropdown-item">Swagger UI</a>
-                                <a target="blank" href="{% url 'schema-redoc' %}" class="dropdown-item">Redoc</a>
-                                <a target="blank" href="api" class="dropdown-item">Built-in</a>
+                                <a target="_blank" href="{% url 'schema-redoc' %}" class="dropdown-item">Redoc</a>
+                                <a target="_blank" href="api" class="dropdown-item">Built-in</a>
                             </div>
                         </div>
                     </div>
@@ -54,7 +66,7 @@
                            class="form-control"
                            type="text"
                            placeholder="Search"
-                           aria-label="Search">
+                           aria-label="Search"/>
                     <button class="btn btn-sm btn-outline-secondary" type="submit">Search</button>
                 </form>
                 <div class="navbar-nav ml-auto action-buttons">
@@ -66,24 +78,21 @@
                             <div class="dropdown-menu action-form">
                                 <form action="{% url 'sign_in' %}" method="post">
                                     {% csrf_token %}
-                                    <div>
-                                        {% for message in messages %}<p style="color: red">{{ message }}</p>{% endfor %}
-                                    </div>
                                     <div class="form-group">
                                         <input type="text"
                                                name="username"
                                                class="form-control"
                                                placeholder="Username"
-                                               required="required">
+                                               required="required"/>
                                     </div>
                                     <div class="form-group">
                                         <input type="password"
                                                name="password"
                                                class="form-control"
                                                placeholder="Password"
-                                               required="required">
+                                               required="required"/>
                                     </div>
-                                    <input type="submit" class="btn btn-primary btn-block" value="Login">
+                                    <input type="submit" class="btn btn-primary btn-block" value="Login" />
                                 </form>
                             </div>
                         </div>
@@ -94,35 +103,32 @@
                             <div class="dropdown-menu action-form">
                                 <form action="{% url 'signup' %}" method="post">
                                     {% csrf_token %}
-                                    <div>
-                                        {% for message in messages %}<p style="color: red">{{ message }}</p>{% endfor %}
-                                    </div>
                                     <p class="hint-text">Fill in this form to create your account!</p>
                                     <div class="form-group">
                                         <input type="text"
                                                name="username"
                                                class="form-control"
                                                placeholder="Username"
-                                               required="required">
+                                               required="required"/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" name="email" class="form-control" placeholder="Email">
+                                        <input type="email" name="email" class="form-control" placeholder="Email" />
                                     </div>
                                     <div class="form-group">
                                         <input type="password"
                                                name="password"
                                                class="form-control"
                                                placeholder="Password"
-                                               required="required">
+                                               required="required"/>
                                     </div>
                                     <div class="form-group">
                                         <input type="password"
                                                name="password_confirm"
                                                class="form-control"
                                                placeholder="Confirm Password"
-                                               required="required">
+                                               required="required"/>
                                     </div>
-                                    <input type="submit" class="btn btn-primary btn-block" value="Sign up">
+                                    <input type="submit" class="btn btn-primary btn-block" value="Sign up" />
                                 </form>
                             </div>
                         </div>
@@ -202,12 +208,12 @@
                                         {% if 'question' in request.GET and request.GET.question %}
                                             <form action="{% url 'new_answer' %}" method="post">
                                                 {% csrf_token %}
-                                                <input type="hidden" name="question" value="{{ request.GET.question }}">
+                                                <input type="hidden" name="question" value="{{ request.GET.question }}" />
                                                 <div class="form-group">
                                                     <label for="answer">Answer</label>
                                                     <textarea class="form-control" id="answer" name="answer" rows="5"></textarea>
                                                 </div>
-                                                <input type="submit" class="btn btn-primary btn-block" value="Post">
+                                                <input type="submit" class="btn btn-primary btn-block" value="Post" />
                                             </form>
                                         {% endif %}
                                     {% else %}
@@ -219,13 +225,13 @@
                                                        name="author"
                                                        class="form-control"
                                                        id="author"
-                                                       placeholder="name@example.com">
+                                                       placeholder="name@example.com"/>
                                             </div>
                                             <div class="form-group">
                                                 <label for="question">Question</label>
                                                 <textarea class="form-control" id="question" name="question" rows="3"></textarea>
                                             </div>
-                                            <input type="submit" class="btn btn-primary btn-block" value="Post">
+                                            <input type="submit" class="btn btn-primary btn-block" value="Post" />
                                         </form>
                                     {% endif %}
                                 </div>
@@ -238,11 +244,6 @@
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-        <script>
-// Prevent dropdown menu from closing when click inside the form
-$(document).on("click", ".action-buttons .dropdown-menu", function(e){
-    e.stopPropagation();
-});
-        </script>
+        <script src="{% static 'faq/script/script.js' %}"></script>
     </body>
 </html>

@@ -1,5 +1,5 @@
 """
-Django views for FAQ application UI
+Django UI views for FAQ application
 """
 
 from django.shortcuts import render, redirect
@@ -23,7 +23,7 @@ def index(request):
 
 
 def signup(request):
-    """FAQ Application signup page"""
+    """FAQ Application signup action"""
     if request.method == 'POST':
         username = request.POST['username']
         email = request.POST['email']
@@ -31,11 +31,12 @@ def signup(request):
         password_confirm = request.POST['password_confirm']
 
         if password == password_confirm:
-            if User.objects.filter(email=email).exists():
-                messages.info(request, 'Email Taken')
-                return redirect('signup')
+            if email:
+                if User.objects.filter(email=email).exists():
+                    messages.error(request, 'Email Taken')
+                    return redirect('signup')
             elif User.objects.filter(username=username).exists():
-                messages.info(request, 'Username Taken')
+                messages.error(request, 'Username Taken')
                 return redirect('signup')
             else:
                 user = User.objects.create_user(username=username, email=email, password=password)
@@ -48,7 +49,7 @@ def signup(request):
                 #create a Profile object for the new user
                 return redirect('home_page')
         else:
-            messages.info(request, 'Password Not Matching')
+            messages.error(request, 'Password Not Matching')
             return redirect('signup')
     else:
         return redirect('home_page')
@@ -66,7 +67,7 @@ def sign_in(request):
             auth.login(request, user)
             return redirect('home_page')
         else:
-            messages.info(request, 'Credentials Invalid')
+            messages.error(request, 'Invalid Credentials')
             return redirect('sign_in')
     else:
         return redirect('home_page')
@@ -86,9 +87,12 @@ def question(request):
         if form.is_valid():
             try:
                 form.save()
+                messages.success(request, 'Question posted')
                 return redirect('home_page')
-            except:
-                pass
+            except Exception as ex:
+                print(ex)
+        else:
+            messages.error(request, 'Invalid Information')
     return redirect('home_page')
 
 
@@ -102,7 +106,10 @@ def answer(request):
         if form.is_valid():
             try:
                 form.save()
+                messages.success(request, 'Answer posted')
                 return redirect('home_page')
-            except:
-                pass
+            except Exception as ex:
+                print(ex)
+        else:
+            messages.error(request, 'Invalid Information')
     return redirect('home_page')

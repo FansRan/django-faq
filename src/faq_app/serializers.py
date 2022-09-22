@@ -34,9 +34,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     """Serializers for User Model"""
 
     answers = serializers.HyperlinkedRelatedField(many=True, view_name='answer-detail', read_only=True)
+    full_name = serializers.CharField(source='get_full_name')
 
     class Meta:
         """Meta definition for User Serializer."""
 
         model = User
-        fields = ['id', 'last_name', 'answers']
+        fields = ['id', 'full_name', 'answers']

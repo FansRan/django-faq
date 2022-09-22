@@ -22,6 +22,7 @@
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Run Locally](#run-locally)
+  - [Deploy on Docker](#deploy-on-docker)
 - [Contact](#contact)
 
 <!-- About the Project -->
@@ -89,6 +90,12 @@
 To run this project, you will need to add the following environment variable to your environment
 
 `DJANGO_SETTINGS_MODULE`
+
+Run the following command
+
+```bash
+ export DJANGO_SETTINGS_MODULE=devngo_django.settings.dev
+```
 
 <!-- Getting Started -->
 
@@ -160,6 +167,19 @@ To run tests, run the following command
 ```bash
   coverage run src/manage.py test src/ -v [0, 1, 2, 3]
 ```
+
+<!-- Deploy -->
+### Deploy on docker
+
+To deploy the app in docker, run the following commands
+
+```bash
+  python3 src/manage.py collectstatic
+  
+  sudo docker-compose up --build
+```
+
+The server listen on port 80
 
 <!-- Contact -->
 

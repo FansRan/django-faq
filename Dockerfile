@@ -20,6 +20,6 @@ RUN pip install -r prod.txt --cache-dir /opt/app/pip_cache
 RUN chown -R www-data:www-data /opt/app
 
 # start server
-EXPOSE 8020
+EXPOSE 80
 STOPSIGNAL SIGTERM
-CMD ["/opt/app/start.sh"]
+ENTRYPOINT [ "/opt/app/start.sh" ]

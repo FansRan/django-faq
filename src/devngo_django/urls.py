@@ -26,7 +26,7 @@ schema_view = get_schema_view(
    openapi.Info(
       title="FAQ Application API",
       default_version='v1',
-      description="Test description",
+      description="FAQ Application built with Django and Django REST Framework",
       terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="contact@test.local"),
       license=openapi.License(name="BSD License"),
