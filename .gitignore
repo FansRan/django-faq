@@ -5,6 +5,7 @@
 __pycache__
 db.sqlite3
 media
+staticfiles
 
 # Backup files # 
 *.bak 
@@ -110,6 +111,7 @@ venv.bak/
 
 # mypy 
 .mypy_cache/ 
+.pip_cache
 
 # Sublime Text # 
 *.tmlanguage.cache 

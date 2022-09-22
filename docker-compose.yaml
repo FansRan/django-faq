@@ -1,0 +1,28 @@
+version: "3.9"
+   
+services:
+  db:
+    image: postgres
+    container_name: faq_db
+    environment:
+      - POSTGRES_DB=faq_app_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    build: .
+    image: faq:1.0
+    container_name: faq_app
+    ports:
+      - "8020:8020"
+    environment:
+      - DJANGO_SETTINGS_MODULE=devngo_django.settings.prod
+      - SECRET_KEY=django-insecure-ziom+o1mxlcoc0xh5qg6c3(1&#hw=f)%8_n#i21kswvc3v)jmw
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - DJANGO_SUPERUSER_USERNAME=admin
+      - DJANGO_SUPERUSER_PASSWORD=sekret_code
+      - DJANGO_SUPERUSER_EMAIL=admin@example.fr
+    depends_on:
+      - db
+

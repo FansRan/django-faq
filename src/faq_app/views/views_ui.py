@@ -15,8 +15,10 @@ from faq_app.forms import QuestionForm, AnswerForm
 def index(request):
     """FAQ Application homepage"""
     list_questions = Question.objects.all()
+    if 'search' in request.GET:
+        list_questions = list_questions.filter(question__icontains=request.GET['search'])
     if not request.user.is_authenticated:
-        list_questions = Question.objects.annotate(count=Count('answers')).filter(count__gt=0)
+        list_questions = list_questions.annotate(count=Count('answers')).filter(count__gt=0)
     return render(request, 'faq/index.html', {'list_questions': list_questions})
 
 

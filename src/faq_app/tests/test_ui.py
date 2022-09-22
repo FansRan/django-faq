@@ -33,8 +33,7 @@ class UIViewTests(TestCase):
         """
         Ensure we can not post new answer without login
         """
-        response = self.client.post(reverse('new_answer'), \
-            data={"answer": "My first answer"})
+        response = self.client.post(reverse('new_answer'), data={"answer": "My first answer"})
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertNotEqual(response["Location"], reverse('home_page'))
         self.assertEqual(response["Location"], '/login?next=/answer')
