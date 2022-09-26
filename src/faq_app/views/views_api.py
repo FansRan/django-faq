@@ -34,7 +34,7 @@ class QuestionViewSet(
 
 
 class AnswerViewSet(viewsets.ModelViewSet):
-    """Question Model ViewSet definition"""
+    """Answer Model ViewSet definition"""
 
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
