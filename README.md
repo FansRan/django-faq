@@ -94,7 +94,7 @@ To run this project, you will need to add the following environment variable to 
 Run the following command
 
 ```bash
- export DJANGO_SETTINGS_MODULE=faq.settings.dev
+ export DJANGO_SETTINGS_MODULE=django_faq.settings.dev
 ```
 
 <!-- Getting Started -->
@@ -173,8 +173,8 @@ To run tests, run the following command
 <!-- Deploy -->
 ### Deploy on docker
 
-To deploy the app in docker, 
-ensure you have docker installed in your machine 
+To deploy the app in docker,
+ensure you have docker installed in your machine
 and run the following command
 
 ```bash  

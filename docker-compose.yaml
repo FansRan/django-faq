@@ -15,7 +15,7 @@ services:
     ports:
       - "80:80"
     environment:
-      - DJANGO_SETTINGS_MODULE=devngo_django.settings.prod
+      - DJANGO_SETTINGS_MODULE=django_faq.settings.prod
       - SECRET_KEY=django-insecure-ziom+o1mxlcoc0xh5qg6c3(1&#hw=f)%8_n#i21kswvc3v)jmw
       - POSTGRES_NAME=faq_app_db
       - POSTGRES_USER=postgres

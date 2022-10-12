@@ -1,5 +1,5 @@
 """
-ASGI config for devngo_django project.
+ASGI config for django_faq project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "devngo_django.settings.prod")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_faq.settings.prod")
 
 application = get_asgi_application()

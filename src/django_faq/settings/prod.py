@@ -4,7 +4,7 @@ Settings for production environment only.
 It override the base settings
 """
 
-from devngo_django.settings.base import *
+from django_faq.settings.base import *
 
 SECRET_KEY = os.environ["SECRET_KEY"]
 
