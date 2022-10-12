@@ -94,7 +94,7 @@ To run this project, you will need to add the following environment variable to 
 Run the following command
 
 ```bash
- export DJANGO_SETTINGS_MODULE=devngo_django.settings.dev
+ export DJANGO_SETTINGS_MODULE=faq.settings.dev
 ```
 
 <!-- Getting Started -->
@@ -134,13 +134,13 @@ Install the project by creating virtual environment
 Clone the project
 
 ```bash
-  git clone https://gitlab.com/FansRan/devngo-django-test.git
+  git clone https://gitlab.com/FansRan/django-faq.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd devngo-django-test
+  cd django-faq
 ```
 
 Install dependencies
@@ -187,4 +187,4 @@ The server listen on port 80
 
 ## Contact
 
-Project Link: [https://gitlab.com/FansRan/devngo-django-test](https://gitlab.com/FansRan/devngo-django-test)
+Project Link: [https://gitlab.com/FansRan/django-faq](https://gitlab.com/FansRan/django-faq)
