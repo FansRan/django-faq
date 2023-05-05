@@ -3,33 +3,18 @@ version: "3"
 services:
   db:
     image: postgres:13.4-alpine
-    volumes:
-      - pgdata:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=${POSTGRES_NAME}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    networks:
-      - faq-app
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: faq:1.0
-    restart: always
+    build: .
+    image: faq:1.1
+    restart: on-failure
     ports:
       - "80:80"
     env_file:
       - .env
     depends_on:
       - db
-    networks:
-      - faq-app
-volumes:
-  pgdata:
-    driver: local
-networks:
-  faq-app:
-    name: faq-app
-    driver: bridge
 
