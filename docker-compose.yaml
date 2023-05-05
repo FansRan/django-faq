@@ -1,28 +1,35 @@
-version: "3.9"
+version: "3"
    
 services:
   db:
-    image: postgres
-    container_name: faq_db
+    image: postgres:13.4-alpine
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=faq_app_db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=${POSTGRES_NAME}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    networks:
+      - faq-app
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: faq:1.0
-    container_name: faq_app
+    restart: always
     ports:
       - "80:80"
-    environment:
-      - DJANGO_SETTINGS_MODULE=django_faq.settings.prod
-      - SECRET_KEY=django-insecure-ziom+o1mxlcoc0xh5qg6c3(1&#hw=f)%8_n#i21kswvc3v)jmw
-      - POSTGRES_NAME=faq_app_db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - DJANGO_SUPERUSER_USERNAME=admin
-      - DJANGO_SUPERUSER_PASSWORD=sekret_pass
-      - DJANGO_SUPERUSER_EMAIL=admin@example.fr
+    env_file:
+      - .env
     depends_on:
       - db
+    networks:
+      - faq-app
+volumes:
+  pgdata:
+    driver: local
+networks:
+  faq-app:
+    name: faq-app
+    driver: bridge
 

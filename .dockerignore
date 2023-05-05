@@ -6,6 +6,8 @@
 *.egg-info
 *.sql.gz
 *.sqlite3
+.coveragerc
+.env
 .cache
 .project
 .idea
